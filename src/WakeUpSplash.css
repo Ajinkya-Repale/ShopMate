@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap');
+
+/* ── Root overlay ── */
+.wus-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FAFAF8;
+  font-family: 'Outfit', sans-serif;
+  overflow: hidden;
+}
+
+/* ── Background orbs ── */
+.wus-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  pointer-events: none;
+  animation: wus-drift 8s ease-in-out infinite alternate;
+}
+.wus-orb1 {
+  width: 480px; height: 480px;
+  background: #E85C26;
+  top: -120px; left: -120px;
+}
+.wus-orb2 {
+  width: 400px; height: 400px;
+  background: #0D8C75;
+  bottom: -100px; right: -80px;
+  animation-delay: -4s;
+}
+@keyframes wus-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(40px, 30px) scale(1.1); }
+}
+
+/* ── Card ── */
+.wus-card {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  border: 1px solid rgba(28,27,24,0.09);
+  border-radius: 20px;
+  padding: 48px 40px 40px;
+  max-width: 460px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(28,27,24,0.08);
+}
+
+/* ── Logo ── */
+.wus-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.wus-logo-icon { font-size: 28px; }
+.wus-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: #1C1B18;
+  letter-spacing: -0.5px;
+}
+
+/* ── Spinner ── */
+.wus-spinner-wrap {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px;
+}
+.wus-spinner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #E85C26;
+  animation: wus-spin 1s linear infinite;
+}
+.wus-spinner2 {
+  inset: 8px;
+  border-top-color: #0D8C75;
+  animation-duration: 0.7s;
+  animation-direction: reverse;
+}
+@keyframes wus-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Text ── */
+.wus-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1C1B18;
+  margin-bottom: 10px;
+}
+.wus-sub {
+  font-size: 14px;
+  color: #6B6860;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.wus-sub strong { color: #E85C26; font-weight: 600; }
+
+/* ── Progress bar ── */
+.wus-bar-track {
+  background: #ECEAE4;
+  border-radius: 100px;
+  height: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.wus-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #E85C26, #0D8C75);
+  border-radius: 100px;
+  transition: width 1s linear;
+}
+.wus-elapsed {
+  font-size: 12px;
+  color: #AEACA6;
+  margin-bottom: 28px;
+}
+
+/* ── Tip box ── */
+.wus-tip-box {
+  background: #FEF2EC;
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: left;
+}
+.wus-tip-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #E85C26;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.wus-tip-text {
+  font-size: 13px;
+  color: #1C1B18;
+  line-height: 1.5;
+  animation: wus-fade 0.4s ease;
+}
+@keyframes wus-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Retry button ── */
+.wus-btn {
+  margin-top: 16px;
+  padding: 12px 32px;
+  background: #E85C26;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.wus-btn:hover { background: #C44A1A; }
+
+/* ── Dark theme support ── */
+[data-theme='dark'] .wus-root  { background: #0f0f0c; }
+[data-theme='dark'] .wus-card  { background: #191916; border-color: rgba(239,237,232,0.08); }
+[data-theme='dark'] .wus-logo-text { color: #efede8; }
+[data-theme='dark'] .wus-title { color: #efede8; }
+[data-theme='dark'] .wus-sub   { color: #8a887e; }
+[data-theme='dark'] .wus-bar-track { background: #222220; }
+[data-theme='dark'] .wus-tip-box   { background: #2a1a10; }
+[data-theme='dark'] .wus-tip-text  { color: #efede8; }
+[data-theme='dark'] .wus-elapsed   { color: #4a4946; }
