@@ -1,0 +1,286 @@
+/* =====================================================
+   CATEGORIES — ShopMate
+   Desktop : 1fr 2fr editorial grid (UNCHANGED)
+   Tablet  : stacked, improved spacing
+   Mobile  : compact hero + 2×2 tile grid
+===================================================== */
+
+/* ===== Base (Desktop >1024px — untouched) ===== */
+.categories {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  min-height: 60vh;
+  border-top: 1px solid var(--border);
+  width: 100%;
+  max-width: 100%;
+}
+
+.categories__left {
+  padding: 4rem;
+  background: var(--bg2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  min-width: 0;
+}
+
+.categories__overline {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 1rem;
+}
+
+.categories__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.categories__title em { color: var(--warm); }
+
+.categories__body {
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.categories__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  min-width: 0;
+}
+
+.cat-block {
+  background: var(--bg);
+  padding: 2.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition);
+  min-width: 0;
+}
+
+.cat-block:hover { background: var(--bg2); }
+.cat-block:hover .cat-block__arrow { opacity: 1; transform: translate(0, 0); }
+
+.cat-block--warm { background: var(--warm); }
+.cat-block--warm:hover { background: var(--warm2); }
+.cat-block--teal { background: var(--teal); }
+.cat-block--teal:hover { background: #f07040; }
+
+.cat-block__icon {
+  display: block;
+  margin-bottom: auto;
+  color: var(--text2);
+  line-height: 0;
+}
+
+.cat-block--warm .cat-block__icon,
+.cat-block--teal .cat-block__icon { color: rgba(255,255,255,0.8); }
+
+.cat-block__name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.cat-block__count { font-size: 0.78rem; color: var(--text3); }
+
+.cat-block--warm .cat-block__name,
+.cat-block--warm .cat-block__count,
+.cat-block--teal .cat-block__name,
+.cat-block--teal .cat-block__count { color: white; }
+
+.cat-block--warm .cat-block__count,
+.cat-block--teal .cat-block__count { opacity: 0.7; }
+
+.cat-block__arrow {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  font-size: 1.3rem;
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: all var(--transition);
+  color: var(--warm);
+}
+
+.cat-block--warm .cat-block__arrow,
+.cat-block--teal .cat-block__arrow { color: white; }
+
+
+/* =====================================================
+   TABLET  — ≤1024px
+===================================================== */
+@media (max-width: 1024px) {
+  .categories { grid-template-columns: 1fr; }
+
+  .categories__left {
+    padding: 3rem 5%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .categories__text-col {
+    flex: 1;
+    min-width: 260px;
+  }
+
+  .categories__title { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1rem; }
+  .categories__body  { margin-bottom: 1.2rem; }
+
+  .categories__grid {
+    min-height: unset;
+    height: 55vw;
+    max-height: 420px;
+  }
+
+  .cat-block { padding: 2rem; }
+}
+
+
+/* =====================================================
+   MOBILE  — ≤768px
+===================================================== */
+@media (max-width: 768px) {
+  .categories { overflow-x: hidden; }
+
+  /* ── Left: compact hero band ── */
+  .categories__left {
+    padding: 2rem 1.2rem 1.8rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .categories__overline {
+    font-size: 0.68rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .categories__title {
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+    margin-bottom: 0.8rem;
+    word-break: break-word;
+  }
+
+  .categories__body {
+    font-size: 0.83rem;
+    line-height: 1.65;
+    margin-bottom: 1.3rem;
+    max-width: 100%;
+  }
+
+  /* ── CTA button tighter ── */
+  .categories__left .btn--warm,
+  .categories__left button {
+    padding: 10px 22px;
+    font-size: 0.83rem;
+  }
+
+  /* ── Grid: 2×2 equal tiles ── */
+  .categories__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    height: auto;
+    max-height: none;
+  }
+
+  .cat-block {
+    padding: 1.5rem 1.2rem 1.3rem;
+    min-height: 140px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  /* Icon top, text bottom — clear visual hierarchy */
+  .cat-block__icon {
+    margin-bottom: 0;
+    padding-bottom: 0.6rem;
+  }
+
+  .cat-block__icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .cat-block__name {
+    font-size: 1rem;
+    margin-bottom: 3px;
+    line-height: 1.2;
+  }
+
+  .cat-block__count { font-size: 0.72rem; }
+
+  /* Arrow always visible on mobile (no hover) */
+  .cat-block__arrow {
+    opacity: 0.55;
+    transform: translate(0, 0);
+    font-size: 1rem;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .cat-block:active { opacity: 0.8; }
+}
+
+
+/* =====================================================
+   SMALL PHONES  — ≤480px
+===================================================== */
+@media (max-width: 480px) {
+  .categories__left { padding: 1.8rem 1rem 1.6rem; }
+
+  .categories__title { font-size: clamp(1.7rem, 9vw, 2.2rem); }
+
+  .cat-block {
+    padding: 1.2rem 1rem;
+    min-height: 130px;
+  }
+
+  .cat-block__name { font-size: 0.92rem; }
+  .cat-block__icon svg { width: 22px; height: 22px; }
+}
+
+
+/* =====================================================
+   TINY PHONES  — ≤360px
+===================================================== */
+@media (max-width: 360px) {
+  .categories__left { padding: 1.5rem 0.9rem; }
+
+  .categories__title { font-size: clamp(1.6rem, 10vw, 2rem); }
+
+  .cat-block {
+    padding: 1rem 0.9rem;
+    min-height: 120px;
+  }
+
+  .cat-block__name { font-size: 0.85rem; }
+  .cat-block__count { font-size: 0.68rem; }
+}

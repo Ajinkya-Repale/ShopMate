@@ -1,0 +1,74 @@
+/* ===== ShopMate Editorial — CSS Variables ===== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #FAFAF8;
+  --bg2: #F3F2EE;
+  --bg3: #ECEAE4;
+  --text: #1C1B18;
+  --text2: #6B6860;
+  --text3: #AEACA6;
+  --warm: #E85C26;
+  --warm2: #C44A1A;
+  --warm-light: #FEF2EC;
+  --teal: #0D8C75;
+  --teal-light: #E6F5F2;
+  --amber: #D97C12;
+  --border: rgba(28, 27, 24, 0.1);
+  --card: #ffffff;
+  --nav-bg: rgba(250, 250, 248, 0.96);
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Outfit', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-full: 100px;
+  --transition: 0.2s ease;
+}
+
+[data-theme='dark'] {
+  --bg: #0f0f0c;
+  --bg2: #191916;
+  --bg3: #222220;
+  --text: #efede8;
+  --text2: #8a887e;
+  --text3: #4a4946;
+  --warm: #f07040;
+  --warm2: #e85c26;
+  --warm-light: #2a1a10;
+  --teal: #14a887;
+  --teal-light: #0a2820;
+  --amber: #e08c20;
+  --border: rgba(239, 237, 232, 0.08);
+  --card: #191916;
+  --nav-bg: rgba(15, 15, 12, 0.96);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.4s, color 0.4s;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
