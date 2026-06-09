@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { productAPI, cartAPI, wishlistAPI } from './api';
-import './CollectionsPage.css';
+import './Collectionspage.css';
 
 const renderStars = (rating = 0) => {
   const full = Math.round(rating);
