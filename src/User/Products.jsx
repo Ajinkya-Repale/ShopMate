@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { productAPI, cartAPI, wishlistAPI } from './api';
-import './components.css';
+import './Components.css';
 
 const TABS = ['All', 'Electronics'];
 

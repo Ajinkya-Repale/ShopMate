@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { productAPI, cartAPI, wishlistAPI } from './api';
-import './Dealspage.css';
+import './DealsPage.css';
 
 /* ── Icons ── */
 const IconArrowLeft = ({ size = 16, ...props }) => (

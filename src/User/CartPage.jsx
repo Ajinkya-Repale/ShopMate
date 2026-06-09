@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { cartAPI, orderAPI, couponAPI, addressAPI, buildAddress } from './api';
-import ProductDetailModal from './ProductDetailModal';
+import ProductDetailModal from './Productdetailmodal';
 import './CartPage.css';
 
 /* ─── SVG Icons ─── */
