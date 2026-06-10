@@ -4,7 +4,7 @@ import './WakeUpSplash.css';
 const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'https://shopmate-backend-m8ql.onrender.com';
 const HEALTH_ENDPOINT = `${BACKEND_URL}/api/products`;
 const POLL_INTERVAL = 4000;
-const MAX_WAIT_MS  = 90000;
+const MAX_WAIT_MS  = 180000; // 3 min
 
 const TIPS = [
   'Browse thousands of curated products across 10+ categories.',
@@ -18,11 +18,12 @@ const TIPS = [
 export default function WakeUpSplash({ onReady }) {
   const [dots, setDots]         = useState('');
   const [tip, setTip]           = useState(0);
-  const [elapsed, setElapsed]   = useState(0);
-  const [timedOut, setTimedOut] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [done, setDone]         = useState(false); // backend ready
+  const [visible, setVisible]   = useState(true);  // for fade-out
 
-  const startRef   = useRef(Date.now());
-  const stopRef    = useRef(false);   // use plain ref, not aliveRef — avoids stale closure bug
+  const startRef = useRef(Date.now());
+  const stopRef  = useRef(false);
 
   /* animated dots */
   useEffect(() => {
@@ -36,13 +37,21 @@ export default function WakeUpSplash({ onReady }) {
     return () => clearInterval(id);
   }, []);
 
-  /* elapsed counter */
+  /* progress animation — ease toward 85%, stall there until backend ready */
   useEffect(() => {
-    const id = setInterval(() => setElapsed(Math.floor((Date.now() - startRef.current) / 1000)), 1000);
+    const id = setInterval(() => {
+      setProgress(prev => {
+        if (done) return prev; // freeze until jump to 100
+        const elapsed = (Date.now() - startRef.current) / 1000;
+        // easeOut curve: fast early, slows near 85
+        const target = 85 * (1 - Math.exp(-elapsed / 30));
+        return Math.max(prev, Math.min(target, 85));
+      });
+    }, 300);
     return () => clearInterval(id);
-  }, []);
+  }, [done]);
 
-  /* poll backend — runs once on mount, cleans up on unmount */
+  /* poll backend */
   useEffect(() => {
     stopRef.current = false;
     let timeoutId;
@@ -50,36 +59,36 @@ export default function WakeUpSplash({ onReady }) {
     const check = async () => {
       if (stopRef.current) return;
 
-      if (Date.now() - startRef.current > MAX_WAIT_MS) {
-        setTimedOut(true);
-        return;
-      }
-
       try {
         const res = await fetch(HEALTH_ENDPOINT, { signal: AbortSignal.timeout(8000) });
-        if (res.ok) {
-          if (!stopRef.current) onReady();
+        if (res.ok && !stopRef.current) {
+          setDone(true);
+          setProgress(100);
+          // wait for bar to animate to 100%, then fade out, then call onReady
+          setTimeout(() => {
+            setVisible(false);
+            setTimeout(onReady, 500); // after fade
+          }, 800);
           return;
         }
       } catch {
-        /* backend still sleeping — expected, keep polling */
+        /* still sleeping */
       }
 
-      timeoutId = setTimeout(check, POLL_INTERVAL);
+      if (Date.now() - startRef.current < MAX_WAIT_MS) {
+        timeoutId = setTimeout(check, POLL_INTERVAL);
+      }
     };
 
     check();
-
     return () => {
       stopRef.current = true;
       clearTimeout(timeoutId);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleRetry = () => window.location.reload();
-
   return (
-    <div className="wus-root">
+    <div className={`wus-root${!visible ? ' wus-fadeout' : ''}`}>
       <div className="wus-orb wus-orb1" />
       <div className="wus-orb wus-orb2" />
 
@@ -89,38 +98,33 @@ export default function WakeUpSplash({ onReady }) {
           <span className="wus-logo-text">ShopMate</span>
         </div>
 
-        {timedOut ? (
-          <>
-            <p className="wus-title">Taking longer than usual…</p>
-            <p className="wus-sub">The server may be under load. Try refreshing.</p>
-            <button className="wus-btn" onClick={handleRetry}>Retry</button>
-          </>
-        ) : (
-          <>
-            <div className="wus-spinner-wrap">
-              <div className="wus-spinner" />
-              <div className="wus-spinner wus-spinner2" />
-            </div>
+        {!done && (
+          <div className="wus-spinner-wrap">
+            <div className="wus-spinner" />
+            <div className="wus-spinner wus-spinner2" />
+          </div>
+        )}
 
-            <p className="wus-title">Waking up the server{dots}</p>
-            <p className="wus-sub">
-              Our backend is starting up on Render's free plan.<br />
-              This takes <strong>up to 60 seconds</strong> — hang tight!
-            </p>
+        <p className="wus-title">
+          {done ? 'Ready!' : `Waking up the server${dots}`}
+        </p>
+        <p className="wus-sub">
+          {done
+            ? 'Taking you to the store…'
+            : <>Our backend is starting up on Render's free plan.<br />This takes <strong>up to 60 seconds</strong> — hang tight!</>
+          }
+        </p>
 
-            <div className="wus-bar-track">
-              <div
-                className="wus-bar-fill"
-                style={{ width: `${Math.min((elapsed / 60) * 100, 99)}%` }}
-              />
-            </div>
-            <p className="wus-elapsed">{elapsed}s elapsed</p>
+        <div className="wus-bar-track">
+          <div className="wus-bar-fill" style={{ width: `${progress}%` }} />
+        </div>
+        <p className="wus-elapsed">{Math.round(progress)}%</p>
 
-            <div className="wus-tip-box">
-              <span className="wus-tip-label">💡 Did you know?</span>
-              <p className="wus-tip-text" key={tip}>{TIPS[tip]}</p>
-            </div>
-          </>
+        {!done && (
+          <div className="wus-tip-box">
+            <span className="wus-tip-label">💡 Did you know?</span>
+            <p className="wus-tip-text" key={tip}>{TIPS[tip]}</p>
+          </div>
         )}
       </div>
     </div>

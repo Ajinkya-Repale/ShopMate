@@ -181,3 +181,16 @@
 [data-theme='dark'] .wus-tip-box   { background: #2a1a10; }
 [data-theme='dark'] .wus-tip-text  { color: #efede8; }
 [data-theme='dark'] .wus-elapsed   { color: #4a4946; }
+/* ── Fade-out on ready ── */
+.wus-root {
+  transition: opacity 0.5s ease;
+}
+.wus-fadeout {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Smooth bar for stall+jump ── */
+.wus-bar-fill {
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
