@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import './Navbar.css';
+import logo from '../assets/logo.png';
 
 const EyeOpen = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -168,7 +169,10 @@ const Navbar = ({
   return (
     <>
       <nav className="navbar">
-        <a href="/" className="navbar__logo">ShopMate<sup>®</sup></a>
+        <a href="/" className="navbar__logo">
+          <img src={logo} alt="ShopMate" className="navbar__logo-img" />
+          ShopMate<sup>®</sup>
+        </a>
 
         {/* Desktop links */}
         <ul className="navbar__links">
@@ -240,7 +244,10 @@ const Navbar = ({
 
         {/* Header */}
         <div className="navbar__drawer-header">
-          <a href="/" className="navbar__drawer-logo">ShopMate<sup style={{ fontSize: '0.5rem', color: 'var(--warm)', verticalAlign: 'super' }}>®</sup></a>
+          <a href="/" className="navbar__drawer-logo">
+          <img src={logo} alt="ShopMate" className="navbar__logo-img" />
+          ShopMate<sup style={{ fontSize: '0.5rem', color: 'var(--warm)', verticalAlign: 'super' }}>®</sup>
+        </a>
           <button className="navbar__drawer-close" onClick={closeDrawer} aria-label="Close menu">✕</button>
         </div>
 
@@ -329,7 +336,3 @@ const Navbar = ({
 };
 
 export default Navbar;
-
-
-
-
