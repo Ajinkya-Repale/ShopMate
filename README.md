@@ -157,4 +157,4 @@ Java Developer
 Feel free to reach out for collaborations, opportunities, or just to say hi.
 
 - Email: ajinkyarepale45@gmail.com
-- GitHub: github.com/Ajinkya-Repale
+- GitHub: [github.com/Ajinkya-Repale](https://github.com/Ajinkya-Repale)
