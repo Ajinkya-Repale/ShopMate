@@ -1,7 +1,8 @@
-
 # ShopMate
 
 A full-stack e-commerce website with a public storefront and a secured admin panel for managing products, users, coupons, and returns. Built with React on the frontend and Spring Boot on the backend, backed by MongoDB.
+
+Live site: https://shop-mate-gamma.vercel.app/
 
 ## Features
 
@@ -141,7 +142,8 @@ Shopmate-backend-main/
 │   │   ├── SecurityConfig.java
 │   │   └── WebConfig.java
 │   └── ShopMateBackendApplication.java
-├── src/main/resources
+├── src/main/resources/application.properties
+├── Dockerfile
 └── pom.xml
 ```
 
@@ -155,4 +157,4 @@ Java Developer
 Feel free to reach out for collaborations, opportunities, or just to say hi.
 
 - Email: ajinkyarepale45@gmail.com
--  GitHub: [github.com/Ajinkya-Repale](https://github.com/Ajinkya-Repale)
+- GitHub: github.com/Ajinkya-Repale
