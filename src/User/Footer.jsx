@@ -13,6 +13,7 @@ const Footer = ({ onDiscoverOpen, onDealsOpen, onBrandsOpen, onOrdersOpen, onAbo
     switch (label) {
       case 'About Us': return onAboutOpen?.();
       case 'Contact': return onContactOpen?.();
+      case 'FAQs': return onContactOpen?.('faq');
       case 'New Arrivals': return onDiscoverOpen?.();
       case 'Flash Sales': return onDealsOpen?.();
       case 'Top Brands': return onBrandsOpen?.();
@@ -30,7 +31,7 @@ const Footer = ({ onDiscoverOpen, onDealsOpen, onBrandsOpen, onOrdersOpen, onAbo
     Company: ['About Us', 'Careers', 'Press', 'Privacy'],
   };
 
-  const ACTIONABLE = new Set(['New Arrivals', 'Flash Sales', 'Top Brands', 'Track Order', 'About Us', 'Contact']);
+  const ACTIONABLE = new Set(['New Arrivals', 'Flash Sales', 'Top Brands', 'Track Order', 'About Us', 'Contact', 'FAQs']);
 
   return (
     <footer className="footer">
