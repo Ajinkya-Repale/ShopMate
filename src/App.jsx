@@ -25,7 +25,7 @@ import SignupPage from './User/SignupPage';
 const isAdminRoute = () => window.location.pathname.startsWith('/admin');
 
 const App = () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');//theme of the project 
   const [user, setUser] = useState(null);
   const [page, setPage] = useState('home'); // 'home' | 'cart' | 'orders' | 'profile' | 'login' | 'signup'
   const [registeredSuccess, setRegisteredSuccess] = useState(false);
