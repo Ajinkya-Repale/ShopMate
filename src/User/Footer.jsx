@@ -36,23 +36,39 @@ const Footer = ({ onDiscoverOpen, onDealsOpen, onBrandsOpen, onOrdersOpen, onAbo
     <footer className="footer">
       {toast && (
         <div style={{
-          position: 'fixed', bottom: '2rem', left: '50%', transform: 'translateX(-50%)',
-          background: '#1c1b18', color: '#fff', padding: '0.65rem 1.4rem',
-          borderRadius: '100px', fontSize: '0.85rem', fontWeight: 500,
-          zIndex: 9999, whiteSpace: 'nowrap', pointerEvents: 'none',
+          position: 'fixed',
+          bottom: '2rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#1c1b18',
+          color: '#fff',
+          padding: '0.65rem 1.4rem',
+          borderRadius: '100px',
+          fontSize: '0.85rem',
+          fontWeight: 500,
+          zIndex: 9999,
+          whiteSpace: 'nowrap',
+          pointerEvents: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
         }}>
-          🔒 {toast}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          {toast}
         </div>
       )}
 
       <div className="footer__grid">
         <div>
           <a href="/" className="footer__logo">
-            ShopMate<sup>®</sup>
+            ShopMate<sup>&reg;</sup>
           </a>
           <p className="footer__about">
             India's most loved shopping companion. Quality products, trusted
-            sellers, unbeatable prices — since 2022.
+            sellers, unbeatable prices since 2022.
           </p>
         </div>
 
@@ -78,15 +94,11 @@ const Footer = ({ onDiscoverOpen, onDealsOpen, onBrandsOpen, onOrdersOpen, onAbo
       </div>
 
       <div className="footer__bottom">
-        <span>© 2026 ShopMate. All rights reserved.</span>
-        <span>🇮🇳 Designed & built in India</span>
+        <span>&copy; 2026 ShopMate. All rights reserved.</span>
+        <span>Designed &amp; built in India</span>
       </div>
     </footer>
   );
 };
 
 export default Footer;
-
-
-
-
