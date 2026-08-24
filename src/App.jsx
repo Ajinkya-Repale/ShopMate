@@ -33,6 +33,7 @@ const App = () => {
   const [collectionTab, setCollectionTab] = useState('All');
   const [collectionSubcategory, setCollectionSubcategory] = useState(null);
   const [collectionLabel, setCollectionLabel] = useState(null);
+  const [contactTab, setContactTab] = useState('form');
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [page]);
 
@@ -172,7 +173,7 @@ const App = () => {
   if (page === 'contact') return (
     <div>
       <Navbar {...navbarProps} />
-      <ContactPage onBack={() => setPage('home')} />
+      <ContactPage onBack={() => setPage('home')} initialTab={contactTab} />
     </div>
   );
 
@@ -208,13 +209,9 @@ const App = () => {
         <MemberStrip onSignUp={() => setPage('signup')} />
         <Reviews />
       </main>
-      <Footer onDiscoverOpen={() => setPage('discover')} onDealsOpen={() => setPage('deals')} onBrandsOpen={() => setPage('brands')} onOrdersOpen={() => setPage('orders')} onAboutOpen={() => setPage('about')} onContactOpen={() => setPage('contact')} user={user} />
+      <Footer onDiscoverOpen={() => setPage('discover')} onDealsOpen={() => setPage('deals')} onBrandsOpen={() => setPage('brands')} onOrdersOpen={() => setPage('orders')} onAboutOpen={() => setPage('about')} onContactOpen={(tab) => { setContactTab(tab || 'form'); setPage('contact'); }} user={user} />
     </div>
   );
 };
 
 export default App;
-
-
-
-

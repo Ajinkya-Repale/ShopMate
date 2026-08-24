@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './ContactPage.css';
 
 /* ─── SVG Icons ─── */
@@ -36,12 +36,20 @@ const FAQS = [
   { cat: 'Delivery', icon: icons.clock, q: 'Is express delivery available?', a: 'Express delivery (1–2 days) is available for select pincodes. You\'ll see delivery options and estimated dates on the product page and at checkout.' },
 ];
 
-const ContactPage = ({ onBack }) => {
+const ContactPage = ({ onBack, initialTab = 'form' }) => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [active, setActive] = useState(null);
-  const [activeTab, setActiveTab] = useState('form');
+  const [activeTab, setActiveTab] = useState(initialTab);
+  const faqRef = useRef(null);
+
+  useEffect(() => {
+    if (initialTab === 'faq') {
+      setActiveTab('faq');
+      setTimeout(() => faqRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  }, [initialTab]);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -228,7 +236,7 @@ const ContactPage = ({ onBack }) => {
 
           {/* ─ FAQ TAB ─ */}
           {activeTab === 'faq' && (
-            <div className="cp-faq-list">
+            <div className="cp-faq-list" ref={faqRef}>
               {FAQS.map((faq, i) => (
                 <div key={i} className={`cp-card cp-faq-item ${active === i ? 'cp-faq-item--open' : ''}`}
                   onClick={() => setActive(active === i ? null : i)}>
@@ -269,7 +277,3 @@ const ContactPage = ({ onBack }) => {
 };
 
 export default ContactPage;
-
-
-
-
