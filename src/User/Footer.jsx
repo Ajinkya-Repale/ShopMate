@@ -54,11 +54,6 @@ const Footer = ({ onDiscoverOpen, onDealsOpen, onBrandsOpen, onOrdersOpen, onAbo
             India's most loved shopping companion. Quality products, trusted
             sellers, unbeatable prices — since 2022.
           </p>
-          <div className="footer__socials">
-            {['𝕏', 'in', 'f', '📸'].map((s) => (
-              <button key={s} className="footer__social-btn">{s}</button>
-            ))}
-          </div>
         </div>
 
         {Object.entries(LINKS).map(([heading, links]) => (
